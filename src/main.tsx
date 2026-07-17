@@ -54,7 +54,9 @@ import "./styles.css";
 import "./rail.css";
 import "./controls.css";
 import { BugsCompact } from "./BugsCompact";
-const api = axios.create({ baseURL: "/api" });
+const api = axios.create({ 
+  baseURL: import.meta.env.VITE_API_URL || "/api", 
+});
 api.interceptors.request.use((c) => {
   const t = localStorage.getItem("token");
   if (t) c.headers.Authorization = `Bearer ${t}`;
