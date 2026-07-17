@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /bugs
+Disallow: /dashboard
+
+Sitemap: https://infraonio-bug-tracker.netlify.app/sitemap.xml
