@@ -2,6 +2,9 @@
 @import "tailwindcss";
 :root {
   --orange: #fc6c26;
+  /* Accessible companion to the Brunt Orange brand accent. */
+  --orange-accessible: #9c3b12;
+  --orange-accessible-hover: #7c2f0e;
   --paper: #fffaf0;
   --vanilla: #fff4d6;
   --ink: #25201c;
@@ -68,7 +71,7 @@ aside {
 }
 .brand span,
 .mark {
-  background: var(--orange);
+  background: var(--orange-accessible);
   border-radius: 9px;
   padding: 7px;
   font: 700 12px "DM Mono";
@@ -127,7 +130,7 @@ header {
   justify-content: space-between;
 }
 .eyebrow {
-  color: var(--orange);
+  color: var(--orange-accessible);
   font: 700 10px "DM Mono";
   letter-spacing: 0.1em;
 }
@@ -248,8 +251,11 @@ header {
   font-weight: 700;
 }
 .primary {
-  background: var(--orange);
+  background: var(--orange-accessible);
   color: white;
+}
+.primary:hover {
+  background: var(--orange-accessible-hover);
 }
 .secondary {
   background: var(--vanilla);
@@ -475,7 +481,7 @@ textarea {
   margin: 13px 0 24px;
 }
 .login h1 i {
-  color: var(--orange);
+  color: var(--orange-accessible);
 }
 .intro {
   max-width: 360px;
