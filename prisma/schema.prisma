@@ -1,0 +1,86 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  QA
+  DEVELOPER
+}
+enum FixType {
+  BUG
+  NEW_FEATURE
+}
+enum Status {
+  OPEN
+  ASSIGNED
+  IN_PROGRESS
+  REVIEW
+  CLOSED
+}
+
+model User {
+  id Int @id @default(autoincrement())
+  name String @unique
+  role Role
+  password String
+  bugsCreated Bug[] @relation("Creator")
+  bugsAssigned Bug[] @relation("Assignee")
+  comments Comment[]
+  notifications Notification[]
+  activities ActivityLog[]
+  createdAt DateTime @default(now())
+}
+
+model Bug {
+  id Int @id @default(autoincrement())
+  name String
+  description String
+  url String
+  screenshot String?
+  fixType FixType @default(BUG)
+  status Status @default(OPEN)
+  creatorId Int
+  assigneeId Int?
+  creator User @relation("Creator",fields:[creatorId],references:[id])
+  assignee User? @relation("Assignee",fields:[assigneeId],references:[id])
+  comments Comment[]
+  activities ActivityLog[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Comment {
+  id Int @id @default(autoincrement())
+  content String
+  bugId Int
+  userId Int
+  createdAt DateTime @default(now())
+  bug Bug @relation(fields:[bugId],references:[id],onDelete:Cascade)
+  user User @relation(fields:[userId],references:[id])
+}
+
+model ActivityLog {
+  id Int @id @default(autoincrement())
+  action String
+  details String?
+  bugId Int
+  userId Int
+  createdAt DateTime @default(now())
+  bug Bug @relation(fields:[bugId],references:[id],onDelete:Cascade)
+  user User @relation(fields:[userId],references:[id])
+}
+
+model Notification {
+  id Int @id @default(autoincrement())
+  message String
+  read Boolean @default(false)
+  userId Int
+  bugId Int?
+  createdAt DateTime @default(now())
+  user User @relation(fields:[userId],references:[id],onDelete:Cascade)
+}
