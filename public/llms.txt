@@ -1,0 +1,13 @@
+# Bug Tracker
+
+Bug Tracker is a role-based issue management application for QA and development teams. QA users report and verify issues; developers take ownership, work on bugs, and submit them for review.
+
+## Application links
+
+- [Login](/login): Sign in as a QA user or developer.
+- [Dashboard](/): View bug status, workload, and activity summaries.
+- [Bug register](/bugs): View, filter, create, edit, and progress bugs according to role permissions.
+
+## Workflow
+
+Newly created issues begin in Open status. A developer takes an Open issue, starts work, and sends it to Review. QA then closes the issue or reopens it when verification fails.
